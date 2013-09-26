@@ -13,17 +13,17 @@ namespace iHealthlabs.OpenAPI.Sample.Library
     public class ConnectToiHealthlabs
     {
         #region You must modify this part
-        public string client_id = "cc3f7432dc33409caf16bb333c26f39c";
-        public string client_secret = "31c425e51a0c41a98610fc06f407cca7";
+        public string client_id = "cc3f7432dc33409******";
+        public string client_secret = "31c425e51a0c41******";
         public string redirect_uri = "http://localhost:9201/TestPage.aspx";
-        public string sc = "be5c4e0be6e54d3aba5b7d688c8f29d5";
-        public string sv_bp = "70723428bf134ff2a56edcaf2290d57e";
-        public string sv_weight = "4e5141c702354dc49e3358b57db753c2";
-        public string sv_bg = "c25ce4f8ddaf4f4baed0ef19f2def806";
-        public string sv_bo = "92bae4fa0f1848538c7ba566f80a04bc";
-        public string sv_ar = "7f0e5424d8d645289c49c7528e304ec9";
-        public string sv_sr = "c2c05b7ac78e4efcaec87e76d71138a9";
-        public string sv_user = "0bd11250d5e443d5a2dc09ab8cf69948";
+        public string sc = "be5c4e0be6e54d3******";
+        public string sv_bp = "70723428bf134ff2a******";
+        public string sv_weight = "4e5141c702354dc49******";
+        public string sv_bg = "c25ce4f8ddaf4f4baed0******";
+        public string sv_bo = "92bae4fa0f1848538c7******";
+        public string sv_ar = "7f0e5424d8d645289c4******";
+        public string sv_sr = "c2c05b7ac78e4efcaec******";
+        public string sv_user = "0bd11250d5e443d5******";
 
         #endregion
 
