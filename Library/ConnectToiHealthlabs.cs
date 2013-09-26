@@ -47,7 +47,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         private string url_bg_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/glucose.json/";
         private string url_bo_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/spo2.json/";
         private string url_ar_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/activity.json/";
-        private string url_sr_data = "http://192.168.1.20:8029/openapiv2/user/{0}/sleep.json/";
+        private string url_sr_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/sleep.json/";
         private string url_user_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}.json/";
 
         public void GetCode()
