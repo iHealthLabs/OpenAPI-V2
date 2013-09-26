@@ -7,47 +7,48 @@ using System.Runtime.Serialization;
 namespace iHealthlabs.OpenAPI.Sample.Library.Entity
 {
     [DataContract]
-    public class DownloadActiveReportDataEntity
+    public class DownloadActiveReportDataResultEntity
     {
+        public DownloadActiveReportDataResultEntity() { }
         /// <summary>
-        /// Steps
+        /// The page data
         /// </summary>
         [DataMember]
-        public double Steps { get; set; }
+        public List<DownloadActiveReportDataEntity> ARDataList { get; set; }
         /// <summary>
-        /// Distance
+        /// Current Total
         /// </summary>
         [DataMember]
-        public double DistanceTraveled { get; set; }
+        public int CurrentRecordCount { get; set; }
         /// <summary>
-        /// Measure time
+        /// Next page URL
         /// </summary>
         [DataMember]
-        public long MDate { get; set; }
+        public string NextPageUrl { get; set; }
         /// <summary>
-        /// note
+        /// Page number
         /// </summary>
         [DataMember]
-        public string Note { get; set; }
+        public int PageLength { get; set; }
         /// <summary>
-        /// Longitude
+        /// Current page
         /// </summary>
         [DataMember]
-        public double Lon { get; set; }
+        public int PageNumber { get; set; }
         /// <summary>
-        /// Latitude
+        /// Page up URL
         /// </summary>
         [DataMember]
-        public double Lat { get; set; }
+        public string PrevPageUrl { get; set; }
         /// <summary>
-        /// Data only Serial number
+        /// Total
         /// </summary>
         [DataMember]
-        public string DataID { get; set; }
+        public int RecordCount { get; set; }
         /// <summary>
-        /// Of the total calories consumed
+        /// 2013 5 15 Distance unit  Kilometer Mile
         /// </summary>
         [DataMember]
-        public double Calories { get; set; }
+        public int DistanceUnit { get; set; }
     }
 }
