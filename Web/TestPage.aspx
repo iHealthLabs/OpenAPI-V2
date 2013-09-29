@@ -16,28 +16,28 @@
         </asp:DropDownList>
         <br />
         <br />
-        <asp:Button ID="btnDownloadBP" runat="server" OnClick="btnDownloadBP_Click" Text="Download BP Data" />
+        <asp:Button ID="btnDownloadBP" runat="server" OnClick="btnDownloadBP_Click" Text="Download OpenApiBP Data" />
         
         <br />
         <br />
         <asp:Button ID="btnDownloadWeight" runat="server" OnClick="btnDownloadWeight_Click"
-            Text="Download Weight Data" />
+            Text="Download OpenApiWeight Data" />
         
         <br />
         <br />
-        <asp:Button ID="btnDownloadBG" runat="server" OnClick="btnDownloadBG_Click" Text="Download BG Data" />
+        <asp:Button ID="btnDownloadBG" runat="server" OnClick="btnDownloadBG_Click" Text="Download OpenApiBG Data" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadBO" runat="server" OnClick="btnDownloadBO_Click" Text="Download BO Data" />
+        <asp:Button ID="btnDownloadBO" runat="server" OnClick="btnDownloadBO_Click" Text="Download OpenApiSpO2 Data" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadAR" runat="server" OnClick="btnDownloadAR_Click" Text="Download AR Data" />
+        <asp:Button ID="btnDownloadAR" runat="server" OnClick="btnDownloadAR_Click" Text="Download OpenApiActivity Data" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadSR" runat="server" OnClick="btnDownloadSR_Click" Text="Download SR Data" />
+        <asp:Button ID="btnDownloadSR" runat="server" OnClick="btnDownloadSR_Click" Text="Download OpenApiSleep Data" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadUser" runat="server" OnClick="btnDownloadUser_Click" Text="Download User Data" />
+        <asp:Button ID="btnDownloadUser" runat="server" OnClick="btnDownloadUser_Click" Text="Download OpenApiUserInfo Data" />
         <br />
         <br />
         <asp:Button ID="btnRefresh" runat="server" OnClick="btnRefresh_Click" Text="Refresh Access Token" />
