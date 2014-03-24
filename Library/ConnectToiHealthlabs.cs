@@ -53,18 +53,20 @@ namespace iHealthlabs.OpenAPI.Sample.Library
 
     public class ConnectToiHealthlabs
     {
+
         #region You must modify this part
-        public string client_id = "1a2095353a8e4f988de89e5822109be9";
-        public string client_secret = "faa4f2d64c2a43e1a41254a4897b371d";
-        public string redirect_uri = "http://localhost:9201/TestPage.aspx";
-        public string sc = "b19d66b0659a49939ba4e72bad6e644f";
-        public string sv_OpenApiBP = "430d6bd34e4a4efb82b5d99ed1c00d52";
-        public string sv_OpenApiWeight = "a3077c47346d4ba4a5d3bab4c4eb55ce";
-        public string sv_OpenApiBG = "0f7f9de98e5b4c5880e80acf43089bc4";
-        public string sv_OpenApiSpO2 = "c3be49f3e2434597b6d16d580caac6e9";
-        public string sv_OpenApiActivity = "93e291a0c8b544239fafe6b4ea343e43";
-        public string sv_OpenApiSleep = "f3a2abd2a1fc4f5b9d217f7a65674881";
-        public string sv_OpenApiUserInfo = "4324b5e3b4cd4295817d70f88a606094";
+        public string client_id = "e4dce2f7027044e0a6ce82e******";
+        public string client_secret = "bb6a0326db55468f8f474a******";
+         public string redirect_uri = "http://localhost:9201/TestPage.aspx";
+        public string sc = "082a65ac25db4262b795f******";
+        public string sv_OpenApiBP = "add22354420244ba9e0f3a5******";
+        public string sv_OpenApiWeight = "bd82a25dcf18446b90f32******";
+        public string sv_OpenApiBG = "978af9615739478ea29794e******";
+        public string sv_OpenApiSpO2 = "3ea83f3ca05342b5b862c******";
+        public string sv_OpenApiActivity = "34f4434741414722b15fb******";
+        public string sv_OpenApiSleep = "d7a1dfc8939742bca0a41e******";
+        public string sv_OpenApiUserInfo = "ba698f077b3843e8b2a3******";
+
 
         #endregion
 
@@ -81,23 +83,23 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         private string APIName_SR = "OpenApiSleep";
         private string APIName_User = "OpenApiUserInfo";
         private string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
+        //sandboxapi.ihealthlabs.com
+        private string url_authorization = "https://api.ihealthlabs.com:8443/OpenApiV2/OAuthv2/userauthorization/";
+        private string url_bp_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/bp.json/";
+        private string url_weight_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/weight.json/";
+        private string url_bg_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/glucose.json/";
+        private string url_bo_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/spo2.json/";
+        private string url_ar_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/activity.json/";
+        private string url_sr_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/sleep.json/";
+        private string url_user_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}.json/";
 
-        private string url_authorization = "http://test.ihealthlabs.com:8000/OpenApiV2/OAuthv2/userauthorization/";
-        private string url_bp_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/bp.json/";
-        private string url_weight_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/weight.json/";
-        private string url_bg_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/glucose.json/";
-        private string url_bo_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/spo2.json/";
-        private string url_ar_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/activity.json/";
-        private string url_sr_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/sleep.json/";
-        private string url_user_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}.json/";
-
-        private string url_bp_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/bp.json/";
-        private string url_weight_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/weight.json/";
-        private string url_bg_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/glucose.json/";
-        private string url_bo_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/spo2.json/";
-        private string url_ar_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application}/activity.json/";
-        private string url_sr_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/sleep.json/";
-        private string url_user_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/userinfo.json/";
+        private string url_bp_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/bp.json/";
+        private string url_weight_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/weight.json/";
+        private string url_bg_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/glucose.json/";
+        private string url_bo_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/spo2.json/";
+        private string url_ar_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application}/activity.json/";
+        private string url_sr_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/sleep.json/";
+        private string url_user_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/userinfo.json/";
 
         public void GetCode()
         {
