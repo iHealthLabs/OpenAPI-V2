@@ -64,5 +64,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         /// </summary>
         [DataMember]
         public string Note { get; set; }
+        /// <summary>
+        /// UserID
+        /// </summary>
+        [DataMember]
+        public string userid { get; set; }
     }
 }

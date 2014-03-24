@@ -44,5 +44,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library.Entity
         /// </summary>
         [DataMember]
         public string DataID { get; set; }
+        /// <summary>
+        /// UserID
+        /// </summary>
+        [DataMember]
+        public string userid { get; set; }
     }
 }

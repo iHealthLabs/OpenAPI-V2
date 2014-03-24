@@ -59,6 +59,11 @@ namespace iHealthlabs.OpenAPI.Sample.Library.Entity
         /// </summary>
         [DataMember]
         public double Awake { get; set; }
+        /// <summary>
+        /// UserID
+        /// </summary>
+        [DataMember]
+        public string userid { get; set; }
 
     }
 }

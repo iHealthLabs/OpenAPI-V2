@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,53 +6,52 @@ using System.Runtime.Serialization;
 
 namespace iHealthlabs.OpenAPI.Sample.Library.Entity
 {
-    [DataContract]
-    public class DownloadBGDataEntity
+    public class DownloadUserInfoResultEntity
     {
         /// <summary>
-        /// Blood glucose value
+        /// The page data
         /// </summary>
         [DataMember]
-        public double BG { get; set; }
+        public List<DownloadUserInfoDataEntity> UserInfoList { get; set; }
         /// <summary>
-        /// Dinner time
+        /// Next page URL
         /// </summary>
         [DataMember]
-        public string DinnerSituation { get; set; }
+        public string NextPageUrl { get; set; }
         /// <summary>
-        /// Medication time
+        /// Paging record number
         /// </summary>
         [DataMember]
-        public string DrugSituation { get; set; }
+        public int CurrentRecordCount { get; set; }
         /// <summary>
-        /// Measure time
+        /// Page number
         /// </summary>
         [DataMember]
-        public long MDate { get; set; }
+        public int PageLength { get; set; }
         /// <summary>
-        /// note string 
+        /// Current page
         /// </summary>
         [DataMember]
-        public string Note { get; set; }
+        public int PageNumber { get; set; }
         /// <summary>
-        /// Latitude
+        /// Page up URL
         /// </summary>
         [DataMember]
-        public double Lat { get; set; }
+        public string PrevPageUrl { get; set; }
         /// <summary>
-        /// Longitude
+        /// Total
         /// </summary>
         [DataMember]
-        public double Lon { get; set; }
+        public int RecordCount { get; set; }
         /// <summary>
-        /// Data only Serial number
+        /// Weight unit  0 kg   1 lbs
         /// </summary>
         [DataMember]
-        public string DataID { get; set; }
+        public int WeightUnit { get; set; }
         /// <summary>
-        /// UserID
+        /// Height unit 0 cm 1 inches
         /// </summary>
         [DataMember]
-        public string userid { get; set; }
+        public int HeightUnit { get; set; }
     }
 }

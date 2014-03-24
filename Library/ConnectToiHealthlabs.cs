@@ -7,23 +7,64 @@ using System.Net;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using iHealthlabs.OpenAPI.Sample.Library.Entity;
+using System.Diagnostics.CodeAnalysis;
 
 namespace iHealthlabs.OpenAPI.Sample.Library
 {
+    /// <summary>
+    /// Change Unix to UTC
+    /// </summary>
+    public static class UnixTime
+    {
+
+        /// <summary>
+        /// UTC 1970-1-1 00:00:00
+        /// </summary>
+        private static readonly DateTime UTCUnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+
+        /// <summary>
+        /// Converts a DateTime to unix time. Unix time is the number of seconds 
+        /// between 1970-1-1 0:0:0.0 (unix epoch) and the time (UTC).
+        /// </summary>
+        /// <param name="time">utc</param>
+        /// <returns>The number of seconds between Unix epoch and the input time</returns>
+        public static long ToUnixTime(DateTime time)
+        {
+            return (long)(time - UTCUnixEpoch).TotalSeconds;
+        }
+
+
+        /// <summary>
+        /// Converts a long representation of a unix time into a DateTime. Unix time is 
+        /// the number of seconds between 1970-1-1 0:0:0.0 (unix epoch) and the time (UTC).
+        /// </summary>
+        /// <param name="unixTime">The number of seconds since Unix epoch (must be >= 0)</param>
+        /// <returns>A UTC DateTime object representing the unix time</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "unix", Justification = "UNIX is a domain term")]
+        public static DateTime FromUnixTime(long unixTime)
+        {
+            if (unixTime < 0)
+                throw new ArgumentOutOfRangeException("unixTime");
+
+            return UTCUnixEpoch.AddSeconds(unixTime);
+        }
+    }
+
+
     public class ConnectToiHealthlabs
     {
         #region You must modify this part
-        public string client_id = "cc3f7432dc33409******";
-        public string client_secret = "31c425e51a0c41******";
+        public string client_id = "1a2095353a8e4f988de89e5822109be9";
+        public string client_secret = "faa4f2d64c2a43e1a41254a4897b371d";
         public string redirect_uri = "http://localhost:9201/TestPage.aspx";
-        public string sc = "be5c4e0be6e54d3******";
-        public string sv_OpenApiBP = "70723428bf134ff2a******";
-        public string sv_OpenApiWeight = "4e5141c702354dc49******";
-        public string sv_OpenApiBG = "c25ce4f8ddaf4f4baed0******";
-        public string sv_OpenApiSpO2 = "92bae4fa0f1848538c7******";
-        public string sv_OpenApiActivity = "7f0e5424d8d645289c4******";
-        public string sv_OpenApiSleep = "c2c05b7ac78e4efcaec******";
-        public string sv_OpenApiUserInfo = "0bd11250d5e443d5******";
+        public string sc = "b19d66b0659a49939ba4e72bad6e644f";
+        public string sv_OpenApiBP = "430d6bd34e4a4efb82b5d99ed1c00d52";
+        public string sv_OpenApiWeight = "a3077c47346d4ba4a5d3bab4c4eb55ce";
+        public string sv_OpenApiBG = "0f7f9de98e5b4c5880e80acf43089bc4";
+        public string sv_OpenApiSpO2 = "c3be49f3e2434597b6d16d580caac6e9";
+        public string sv_OpenApiActivity = "93e291a0c8b544239fafe6b4ea343e43";
+        public string sv_OpenApiSleep = "f3a2abd2a1fc4f5b9d217f7a65674881";
+        public string sv_OpenApiUserInfo = "4324b5e3b4cd4295817d70f88a606094";
 
         #endregion
 
@@ -41,14 +82,22 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         private string APIName_User = "OpenApiUserInfo";
         private string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
 
-        private string url_authorization = "https://api.ihealthlabs.com:8443/OpenApiV2/OAuthv2/userauthorization";
-        private string url_bp_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/bp.json/";
-        private string url_weight_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/weight.json/";
-        private string url_bg_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/glucose.json/";
-        private string url_bo_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/spo2.json/";
-        private string url_ar_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/activity.json/";
-        private string url_sr_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/sleep.json/";
-        private string url_user_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}.json/";
+        private string url_authorization = "http://test.ihealthlabs.com:8000/OpenApiV2/OAuthv2/userauthorization/";
+        private string url_bp_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/bp.json/";
+        private string url_weight_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/weight.json/";
+        private string url_bg_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/glucose.json/";
+        private string url_bo_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/spo2.json/";
+        private string url_ar_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/activity.json/";
+        private string url_sr_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}/sleep.json/";
+        private string url_user_data = "http://test.ihealthlabs.com:8000/openapiv2/user/{0}.json/";
+
+        private string url_bp_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/bp.json/";
+        private string url_weight_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/weight.json/";
+        private string url_bg_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/glucose.json/";
+        private string url_bo_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/spo2.json/";
+        private string url_ar_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application}/activity.json/";
+        private string url_sr_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/sleep.json/";
+        private string url_user_data_client = "http://test.ihealthlabs.com:8000/openapiv2/application/userinfo.json/";
 
         public void GetCode()
         {
@@ -74,39 +123,60 @@ namespace iHealthlabs.OpenAPI.Sample.Library
 
             if (ResultString.StartsWith("{\"Error\":"))
             {
+                httpContext.Response.Write(url);
+                httpContext.Response.Write("<br/>");
                 this.Error = JsonDeserializ<ApiErrorEntity>(ResultString);
                 return false;
             }
             else
             {
+                httpContext.Response.Write(url);
+                httpContext.Response.Write("<br/>");
+                httpContext.Response.Write(ResultString);
                 AccessTokenEntity accessToken = this.JsonDeserializ<AccessTokenEntity>(ResultString);
                 httpContext.Session["token"] = accessToken;
                 return true;
             }
         }
 
-        public bool RefreshAccessToken(string code, string client_para, HttpContext httpContext)
+        public bool RefreshAccessToken(string code, string client_para, HttpContext httpContext,out AccessTokenEntity aAccessTokenEntity)
         {
-            string url = url_authorization
-                + "?client_id=" + client_id
-                + "&client_secret=" + client_secret
-                + "&client_para=" + client_para
-                + "&refresh_token=" + ((AccessTokenEntity)httpContext.Session["token"]).RefreshToken
-                + "&response_type=" + response_type_refresh_token
-                + "&redirect_uri=" + redirect_uri;
-
-            string ResultString = HttpGet(url);
-
-            if (ResultString.StartsWith("{\"Error\":"))
+            if (((AccessTokenEntity)httpContext.Session["token"]) != null)
             {
-                this.Error = JsonDeserializ<ApiErrorEntity>(ResultString);
-                return false;
+                string url = url_authorization
+                    + "?client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&client_para=" + client_para
+                    + "&refresh_token=" + ((AccessTokenEntity)httpContext.Session["token"]).RefreshToken
+                    + "&response_type=" + response_type_refresh_token
+                    + "&redirect_uri=" + redirect_uri;
+
+                string ResultString = HttpGet(url);
+
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    this.Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    aAccessTokenEntity = null;
+                    return false;
+                }
+                else
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    httpContext.Response.Write(ResultString);
+                    AccessTokenEntity accessToken = this.JsonDeserializ<AccessTokenEntity>(ResultString);
+                    httpContext.Session["token"] = accessToken;
+                    aAccessTokenEntity = accessToken;
+                    return true;
+                }
             }
             else
             {
-                AccessTokenEntity accessToken = this.JsonDeserializ<AccessTokenEntity>(ResultString);
-                httpContext.Session["token"] = accessToken;
-                return true;
+                this.Error = new ApiErrorEntity("Do not has AccessToken.", "Do not has AccessToken.", 0000);
+                aAccessTokenEntity = null;
+                return false;
             }
         }
 
@@ -135,7 +205,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     url += "&page_index=" + pageIndex.Value;
 
                 if (startTime.HasValue)
-                    url += "&start_time=" + startTime.Value.ToString();
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
 
                 if (endTime.HasValue)
                     url += "&end_time=" + endTime.Value.ToString();
@@ -157,6 +227,63 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 return null;
             }
         }
+
+        /// <summary>
+        /// Download application bp data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadBPDataResultEntity DownloadClientBPData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aBPUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = "";
+
+                url = url_bp_data_client
+              + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+              + "&client_id=" + client_id
+              + "&client_secret=" + client_secret
+              + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+              + "&sc=" + sc
+              + "&sv=" + sv_OpenApiBP
+              + "&locale=" + aBPUnit;
+
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    httpContext.Response.Write(ResultString);
+                    return this.JsonDeserializ<DownloadBPDataResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
 
         /// <summary>
         /// Download weight data
@@ -183,10 +310,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     url += "&page_index=" + pageIndex.Value;
 
                 if (startTime.HasValue)
-                    url += "&start_time=" + startTime.Value.ToString();
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
 
                 if (endTime.HasValue)
-                    url += "&end_time=" + endTime.Value.ToString();
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
 
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
@@ -204,7 +331,60 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 return null;
             }
         }
+        /// <summary>
+        /// Download application weight data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadWeightDataResultEntity DownloadClientWeightData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aWeightUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = "";
+                url = url_weight_data_client
+              + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+              + "&client_id=" + client_id
+              + "&client_secret=" + client_secret
+              + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+              + "&sc=" + sc
+              + "&sv=" + sv_OpenApiWeight
+              + "&locale=" + aWeightUnit;
 
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    httpContext.Response.Write(ResultString);
+                    return this.JsonDeserializ<DownloadWeightDataResultEntity>(ResultString);
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// Download BG Data
         /// </summary>
@@ -229,10 +409,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     url += "&page_index=" + pageIndex.Value;
 
                 if (startTime.HasValue)
-                    url += "&start_time=" + startTime.Value.ToString();
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
 
                 if (endTime.HasValue)
-                    url += "&end_time=" + endTime.Value.ToString();
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
 
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
@@ -250,7 +430,60 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 return null;
             }
         }
+        /// <summary>
+        /// Download application bg data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadBGDataResultEntity DownloadClientBGData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aBGUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string
+                    url = url_bg_data_client
+                  + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                  + "&client_id=" + client_id
+                  + "&client_secret=" + client_secret
+                  + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                  + "&sc=" + sc
+                  + "&sv=" + sv_OpenApiBG
+                  + "&locale=" + aBGUnit;
 
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    httpContext.Response.Write(ResultString);
+                    return this.JsonDeserializ<DownloadBGDataResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                Error = new ApiErrorEntity("", "Deny", -1);
+                return null;
+            }
+        }
         /// <summary>
         /// Download BO Data
         /// </summary>
@@ -276,10 +509,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     url += "&page_index=" + pageIndex.Value;
 
                 if (startTime.HasValue)
-                    url += "&start_time=" + startTime.Value.ToString();
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
 
                 if (endTime.HasValue)
-                    url += "&end_time=" + endTime.Value.ToString();
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
 
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
@@ -297,7 +530,57 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 return null;
             }
         }
+        /// <summary>
+        /// Download ClientBO Data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadBODataResultEntity DownloadClientBOData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aBOUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = url_bo_data_client
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiSpO2
+                    + "&locale=" + aBOUnit;
 
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    httpContext.Response.Write(ResultString);
+                    return this.JsonDeserializ<DownloadBODataResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// Download ActiveReport Data
         /// </summary>
@@ -323,10 +606,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     url += "&page_index=" + pageIndex.Value;
 
                 if (startTime.HasValue)
-                    url += "&start_time=" + startTime.Value.ToString();
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
 
                 if (endTime.HasValue)
-                    url += "&end_time=" + endTime.Value.ToString();
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
 
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
@@ -344,7 +627,57 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 return null;
             }
         }
+        /// <summary>
+        /// Download ClientActiveReport Data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadActiveReportDataResultEntity DownloadClientARData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aARUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = url_ar_data_client
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiActivity
+                    + "&locale=" + aARUnit;
 
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    httpContext.Response.Write(ResultString);
+                    return this.JsonDeserializ<DownloadActiveReportDataResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// Download SleepReport Data
         /// </summary>
@@ -370,10 +703,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     url += "&page_index=" + pageIndex.Value;
 
                 if (startTime.HasValue)
-                    url += "&start_time=" + startTime.Value.ToString();
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
 
                 if (endTime.HasValue)
-                    url += "&end_time=" + endTime.Value.ToString();
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
 
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
@@ -391,7 +724,57 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 return null;
             }
         }
+        /// <summary>
+        /// Download ClientSleepReport Data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadSleepReportDataResultEntity DownloadClientSRData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aSRUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = url_sr_data_client
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiSleep
+                    + "&locale=" + aSRUnit;
 
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    httpContext.Response.Write(ResultString);
+                    return this.JsonDeserializ<DownloadSleepReportDataResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// Download User Data
         /// </summary>
@@ -417,10 +800,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     url += "&page_index=" + pageIndex.Value;
 
                 if (startTime.HasValue)
-                    url += "&start_time=" + startTime.Value.ToString();
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
 
                 if (endTime.HasValue)
-                    url += "&end_time=" + endTime.Value.ToString();
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
 
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
@@ -438,7 +821,57 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 return null;
             }
         }
+        /// <summary>
+        /// Download ClientUser Data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadUserInfoResultEntity DownloadClientUserData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aUserUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = url_user_data_client
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiUserInfo
+                    + "&locale=" + aUserUnit;
 
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+                    httpContext.Response.Write(url);
+                    httpContext.Response.Write("<br/>");
+                    httpContext.Response.Write(ResultString);
+                    return this.JsonDeserializ<DownloadUserInfoResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         #region Tool functions
         private T JsonDeserializ<T>(string Json)

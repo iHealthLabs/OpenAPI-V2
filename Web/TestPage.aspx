@@ -2,13 +2,13 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-    <asp:Label Text="Unit:" runat="server"></asp:Label>
+    <asp:Label ID="Label1" Text="Unit:" runat="server"></asp:Label>
     <asp:DropDownList ID="dlResponseType" runat="server" Height="25px" Width="136px">
             <asp:ListItem>en_US</asp:ListItem>
             <asp:ListItem>en_UK</asp:ListItem>
@@ -40,6 +40,28 @@
         <asp:Button ID="btnDownloadUser" runat="server" OnClick="btnDownloadUser_Click" Text="Download OpenApiUserInfo Data" />
         <br />
         <br />
+        <asp:Button ID="btnDownloadClientBP" runat="server" 
+            Text="Download ClientAPP OpenApiBP Data" onclick="btnDownloadClientBP_Click" />
+        <br />
+        <br />
+        <asp:Button ID="btnDownloadClientWeight" runat="server" Text="Download ClientAPP OpenApiWeight Data" onclick="btnDownloadClientWeight_Click" />
+        <br />
+        <br />
+        <asp:Button ID="btnDownloadClientBO" runat="server" Text="Download ClientAPP OpenApiBO Data" onclick="btnDownloadClientBO_Click" />
+        <br />
+        <br />
+        <asp:Button ID="btnDownloadClientBG" runat="server" Text="Download ClientAPP OpenApiBG Data" onclick="btnDownloadClientBG_Click" />
+        <br />
+        <br />
+        <asp:Button ID="btnDownloadClientSR" runat="server" Text="Download ClientAPP OpenApiSleep Data" onclick="btnDownloadClientSR_Click" />
+        <br />
+        <br />
+        <asp:Button ID="btnDownloadClientAR" runat="server" Text="Download ClientAPP OpenApiActivity Data" onclick="btnDownloadClientAR_Click" />
+        <br />
+        <br />
+        <asp:Button ID="btnDownloadClientUser" runat="server" Text="Download ClientAPP OpenApiUserInfo Data" onclick="btnDownloadClientUser_Click" />
+        <br />
+        <br />      
         <asp:Button ID="btnRefresh" runat="server" OnClick="btnRefresh_Click" Text="Refresh Access Token" />
         <br />
         <br />
@@ -84,6 +106,9 @@
                             <th style="width: 90px">
                                 Note
                             </th>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,6 +146,9 @@
                         </td>
                         <td bgcolor="#f4f4f4">
                             <%#Eval("Note")%>
+                        </td>
+                        <td bgcolor="#f4f4f4">
+                            <%#Eval("userid")%>
                         </td>
                 </tr>
             </ItemTemplate>
@@ -166,6 +194,9 @@
                             <th style="width: 90px">
                                 Note
                             </th>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -205,6 +236,9 @@
                     <td bgcolor="#f4f4f4">
                         <%#Eval("Note")%>
                     </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid") %>
+                    </td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
@@ -240,6 +274,9 @@
                             <th style="width: 90px">
                                 Data only Serial number
                             </th>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -269,6 +306,9 @@
                     </td>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("DataID")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid") %>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -302,6 +342,9 @@
                             <th style="width: 90px">
                                 Data only Serial number
                             </th>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -328,6 +371,9 @@
                     </td>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("DataID")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid") %>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -364,6 +410,9 @@
                             <th style="width: 90px">
                                 Calories
                             </th>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -393,6 +442,9 @@
                     </td>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("Calories")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid") %>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -435,6 +487,9 @@
                             <th style="width: 90px">
                                 Awake
                             </th>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -471,6 +526,69 @@
                     <td bgcolor="#f4f4f4">
                         <%#Eval("Awake")%>
                     </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid") %>
+                    </td>
+                </tr>
+            </ItemTemplate>
+            <FooterTemplate>
+                </tbody></table>
+            </FooterTemplate>
+        </asp:Repeater>
+        <asp:Repeater ID="rptUserData" runat="server" Visible="false">
+            <HeaderTemplate>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
+                            <th style="width: 90px">
+                                NickName
+                            </th>
+                            <th style="width: 90px">
+                                Gender
+                            </th>
+                            <th style="width: 90px">
+                                Height
+                            </th>
+                            <th style="width: 90px">
+                                Weight
+                            </th>
+                            <th style="width: 90px">
+                                DateOfBirth
+                            </th>
+                            <th style="width: 90px">
+                                Logo
+                            </th>                           
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("nickname")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("gender")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("height")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("weight")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("dateofbirth")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("logo")%>
+                    </td>                  
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
