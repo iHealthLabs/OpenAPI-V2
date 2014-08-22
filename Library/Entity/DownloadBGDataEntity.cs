@@ -50,9 +50,20 @@ namespace iHealthlabs.OpenAPI.Sample.Library.Entity
         [DataMember]
         public string DataID { get; set; }
         /// <summary>
-        /// UserID
+        /// Last change time
+        /// </summary>
+        [DataMember]
+        public long LastChangeTime { get; set; }
+        /// <summary>
+        /// Data Source the value is "Manual" or "FromDevice"
+        /// </summary>
+        [DataMember]
+        public string DataSource { get; set; }
+        /// <summary>
+        /// UserId
         /// </summary>
         [DataMember]
         public string userid { get; set; }
+
     }
 }

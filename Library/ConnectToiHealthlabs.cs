@@ -57,7 +57,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         #region You must modify this part
         public string client_id = "e4dce2f7027044e0a6ce82e******";
         public string client_secret = "bb6a0326db55468f8f474a******";
-         public string redirect_uri = "http://localhost:9201/TestPage.aspx";
+        public string redirect_uri = "http://localhost:9201/TestPage.aspx";
         public string sc = "082a65ac25db4262b795f******";
         public string sv_OpenApiBP = "add22354420244ba9e0f3a5******";
         public string sv_OpenApiWeight = "bd82a25dcf18446b90f32******";
@@ -66,7 +66,8 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         public string sv_OpenApiActivity = "34f4434741414722b15fb******";
         public string sv_OpenApiSleep = "d7a1dfc8939742bca0a41e******";
         public string sv_OpenApiUserInfo = "ba698f077b3843e8b2a3******";
-
+        public string sv_OpenApiFood = "43f68d3478aa436abd96a440a6d7fd64";
+        public string sv_OpenApiSport = "43f68d3478aa436abd96a440a6d7fd64";
 
         #endregion
 
@@ -83,31 +84,47 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         private string APIName_SR = "OpenApiSleep";
         private string APIName_User = "OpenApiUserInfo";
         private string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
-        //sandboxapi.ihealthlabs.com
-        private string url_authorization = "https://api.ihealthlabs.com:8443/OpenApiV2/OAuthv2/userauthorization/";
+        private string APIName_FOOD = "OpenApiFood";
+        private string APIName_SPORT = "OpenApiSport";
+        public string url_authorization = "https://api.ihealthlabs.com:8443/OpenApiV2/OAuthv2/userauthorization/";
         private string url_bp_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/bp.json/";
+        private string url_bp_data_xml = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/bp.xml/";
         private string url_weight_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/weight.json/";
+        private string url_weight_data_xml = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/weight.xml/";
         private string url_bg_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/glucose.json/";
+        private string url_bg_data_xml = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/glucose.xml/";
         private string url_bo_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/spo2.json/";
+        private string url_bo_data_xml = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/spo2.xml/";
         private string url_ar_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/activity.json/";
+        private string url_ar_data_xml = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/activity.json/";
         private string url_sr_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/sleep.json/";
+        private string url_sr_data_xml = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/sleep.json/";
         private string url_user_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}.json/";
+        private string url_food_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/food.json/";
+        private string url_sport_data = "https://api.ihealthlabs.com:8443/openapiv2/user/{0}/sport.json/";
 
         private string url_bp_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/bp.json/";
         private string url_weight_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/weight.json/";
         private string url_bg_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/glucose.json/";
         private string url_bo_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/spo2.json/";
-        private string url_ar_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application}/activity.json/";
+        private string url_ar_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/activity.json/";
         private string url_sr_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/sleep.json/";
         private string url_user_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/userinfo.json/";
+        private string url_food_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/food.json/";
+        private string url_sport_data_client = "https://api.ihealthlabs.com:8443/openapiv2/application/sport.json/";
+
+
+        public ConnectToiHealthlabs()
+        {
+        }
 
         public void GetCode()
         {
             string url = url_authorization
                 + "?client_id=" + client_id
                 + "&response_type=" + response_type_code
-                + "&redirect_uri=" + redirect_uri
-                + "&APIName=" + APIName_BP + " " + APIName_Weight + " " + APIName_BG + " " + APIName_BO + " " + APIName_SR + " " + APIName_User + " " + APIName_AR;
+                + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                + "&APIName=" + APIName_BP + " " + APIName_Weight + " " + APIName_BG + " " + APIName_BO + " " + APIName_SR + " " + APIName_User + " " + APIName_AR + " " + APIName_FOOD + " " + APIName_SPORT;
             HttpContext.Current.Response.Redirect(url);
         }
 
@@ -119,7 +136,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
             + "&client_para=" + client_para
             + "&code=" + code
             + "&grant_type=" + grant_type_authorization_code
-            + "&redirect_uri=" + redirect_uri;
+            + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri);
 
             string ResultString = this.HttpGet(url);
 
@@ -141,7 +158,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
             }
         }
 
-        public bool RefreshAccessToken(string code, string client_para, HttpContext httpContext,out AccessTokenEntity aAccessTokenEntity)
+        public bool RefreshAccessToken(string code, string client_para, HttpContext httpContext, out AccessTokenEntity aAccessTokenEntity)
         {
             if (((AccessTokenEntity)httpContext.Session["token"]) != null)
             {
@@ -151,7 +168,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     + "&client_para=" + client_para
                     + "&refresh_token=" + ((AccessTokenEntity)httpContext.Session["token"]).RefreshToken
                     + "&response_type=" + response_type_refresh_token
-                    + "&redirect_uri=" + redirect_uri;
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri);
 
                 string ResultString = HttpGet(url);
 
@@ -198,7 +215,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
                     + "&client_id=" + client_id
                     + "&client_secret=" + client_secret
-                    + "&redirect_uri=" + redirect_uri
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
                     + "&sc=" + sc
                     + "&sv=" + sv_OpenApiBP
                     + "&locale=" + aBPUnit;
@@ -266,16 +283,11 @@ namespace iHealthlabs.OpenAPI.Sample.Library
 
                 if (ResultString.StartsWith("{\"Error\":"))
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
                     Error = JsonDeserializ<ApiErrorEntity>(ResultString);
                     return null;
                 }
                 else
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
-                    httpContext.Response.Write(ResultString);
                     return this.JsonDeserializ<DownloadBPDataResultEntity>(ResultString);
                 }
             }
@@ -303,7 +315,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
                     + "&client_id=" + client_id
                     + "&client_secret=" + client_secret
-                    + "&redirect_uri=" + redirect_uri
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
                     + "&sc=" + sc
                     + "&sv=" + sv_OpenApiWeight
                     + "&locale=" + aWeightUnit;
@@ -368,15 +380,11 @@ namespace iHealthlabs.OpenAPI.Sample.Library
 
                 if (ResultString.StartsWith("{\"Error\":"))
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
                     Error = JsonDeserializ<ApiErrorEntity>(ResultString);
                     return null;
                 }
                 else
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
                     httpContext.Response.Write(ResultString);
                     return this.JsonDeserializ<DownloadWeightDataResultEntity>(ResultString);
                 }
@@ -403,7 +411,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
                     + "&client_id=" + client_id
                     + "&client_secret=" + client_secret
-                    + "&redirect_uri=" + redirect_uri
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
                     + "&sc=" + sc
                     + "&sv=" + sv_OpenApiBG
                     + "&locale=" + aBGUnit;
@@ -467,16 +475,11 @@ namespace iHealthlabs.OpenAPI.Sample.Library
 
                 if (ResultString.StartsWith("{\"Error\":"))
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
                     Error = JsonDeserializ<ApiErrorEntity>(ResultString);
                     return null;
                 }
                 else
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
-                    httpContext.Response.Write(ResultString);
                     return this.JsonDeserializ<DownloadBGDataResultEntity>(ResultString);
                 }
             }
@@ -502,7 +505,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
                     + "&client_id=" + client_id
                     + "&client_secret=" + client_secret
-                    + "&redirect_uri=" + redirect_uri
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
                     + "&sc=" + sc
                     + "&sv=" + sv_OpenApiSpO2
                     + "&locale=" + aBOUnit;
@@ -565,16 +568,11 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
                     Error = JsonDeserializ<ApiErrorEntity>(ResultString);
                     return null;
                 }
                 else
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
-                    httpContext.Response.Write(ResultString);
                     return this.JsonDeserializ<DownloadBODataResultEntity>(ResultString);
                 }
             }
@@ -662,16 +660,11 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
                     Error = JsonDeserializ<ApiErrorEntity>(ResultString);
                     return null;
                 }
                 else
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
-                    httpContext.Response.Write(ResultString);
                     return this.JsonDeserializ<DownloadActiveReportDataResultEntity>(ResultString);
                 }
             }
@@ -696,7 +689,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
                     + "&client_id=" + client_id
                     + "&client_secret=" + client_secret
-                    + "&redirect_uri=" + redirect_uri
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
                     + "&sc=" + sc
                     + "&sv=" + sv_OpenApiSleep
                     + "&locale=" + aSRUnit;
@@ -759,17 +752,204 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
+
                     Error = JsonDeserializ<ApiErrorEntity>(ResultString);
                     return null;
                 }
                 else
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
-                    httpContext.Response.Write(ResultString);
+
                     return this.JsonDeserializ<DownloadSleepReportDataResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Download FoodReport Data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadFoodDataResultEntity DownloadFOODData(HttpContext httpContext, int? pageIndex, DateTime? MDateTime, string aFOODUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = string.Format(url_food_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiFood
+                    + "&locale=" + aFOODUnit;
+
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (MDateTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(MDateTime.Value).ToString();
+
+
+                string ResultString = this.HttpGet(url);
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+
+                    return this.JsonDeserializ<DownloadFoodDataResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Download ClientFoodReport Data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadFoodDataResultEntity DownloadClientFOODData(HttpContext httpContext, int? pageIndex, DateTime? MDateTime, string aFOODUnit)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = url_food_data_client
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiFood
+                    + "&locale=" + aFOODUnit;
+
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (MDateTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(MDateTime.Value).ToString();
+
+                //if (endTime.HasValue)
+                //    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+
+                    return this.JsonDeserializ<DownloadFoodDataResultEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Download SportReport Data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadSportDataReportEntity DownloadSPORTData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = string.Format(url_sport_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiSport;
+                //+ "&locale=" + aFOODUnit;
+
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+
+                    return this.JsonDeserializ<DownloadSportDataReportEntity>(ResultString);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Download ClientSportReport Data
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <param name="pageIndex">can be set null</param>
+        /// <param name="startTime">can be set null</param>
+        /// <param name="endTime">can be set null</param>
+        /// <returns>if some errors happened, it will be return null.</returns>
+        public DownloadSportDataReportEntity DownloadClientSportData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                string url = url_sport_data_client
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiSport;
+                //+ "&locale=" + aFOODUnit;
+
+                if (pageIndex.HasValue)
+                    url += "&page_index=" + pageIndex.Value;
+
+                if (startTime.HasValue)
+                    url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                if (endTime.HasValue)
+                    url += "&end_time=" + UnixTime.ToUnixTime(endTime.Value).ToString();
+
+                string ResultString = this.HttpGet(url);
+                if (ResultString.StartsWith("{\"Error\":"))
+                {
+
+                    Error = JsonDeserializ<ApiErrorEntity>(ResultString);
+                    return null;
+                }
+                else
+                {
+
+                    return this.JsonDeserializ<DownloadSportDataReportEntity>(ResultString);
                 }
             }
             else
@@ -793,7 +973,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                     + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
                     + "&client_id=" + client_id
                     + "&client_secret=" + client_secret
-                    + "&redirect_uri=" + redirect_uri
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(redirect_uri)
                     + "&sc=" + sc
                     + "&sv=" + sv_OpenApiUserInfo
                     + "&locale=" + aUserUnit;
@@ -856,16 +1036,13 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 string ResultString = this.HttpGet(url);
                 if (ResultString.StartsWith("{\"Error\":"))
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
+
                     Error = JsonDeserializ<ApiErrorEntity>(ResultString);
                     return null;
                 }
                 else
                 {
-                    httpContext.Response.Write(url);
-                    httpContext.Response.Write("<br/>");
-                    httpContext.Response.Write(ResultString);
+
                     return this.JsonDeserializ<DownloadUserInfoResultEntity>(ResultString);
                 }
             }
@@ -876,7 +1053,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         }
 
         #region Tool functions
-        private T JsonDeserializ<T>(string Json)
+        public T JsonDeserializ<T>(string Json)
         {
             using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(Json)))
             {
@@ -885,7 +1062,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library
                 return (T)p1;
             }
         }
-        private string HttpGet(string url)
+        public string HttpGet(string url)
         {
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
             request.Method = "GET";
@@ -900,5 +1077,737 @@ namespace iHealthlabs.OpenAPI.Sample.Library
             return ResultString;
         }
         #endregion
+        #region 2014-4-16
+        private string HttpPost(string url, string str)
+        {
+            Encoding encoding = Encoding.UTF8;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "post";
+            request.Accept = "text/html, application/xhtml+xml, */*";
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            string tempJson = str;
+            byte[] buffer = Encoding.UTF8.GetBytes(tempJson);
+            request.ContentLength = buffer.Length;
+            request.GetRequestStream().Write(buffer, 0, buffer.Length);
+            string ResultString = "";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            using (StreamReader reader = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8))
+            {
+                ResultString = reader.ReadToEnd();
+            }
+            return ResultString;
+        }
+        #endregion
+        public string UploadloadBPData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string post, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_bp_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                   + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                   + "&client_id=" + client_id
+                   + "&client_secret=" + client_secret
+                   + "&sc=" + sc
+                   + "&sv=" + sv_OpenApiBP
+                   + "&request_type=" + post
+                   + "&querynumber=" + querynumber;
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+                else
+                {
+                    string url = string.Format(url_bp_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiBP
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+
+                }
+
+
+
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UploadloadBGData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string post, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_bg_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiBG
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+                }
+                else
+                {
+                    string url = string.Format(url_bg_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiBG
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+                }
+
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UploadloadWEIGHTData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string post, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_weight_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                   + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                   + "&client_id=" + client_id
+                   + "&client_secret=" + client_secret
+                   + "&sc=" + sc
+                   + "&sv=" + sv_OpenApiWeight
+                   + "&request_type=" + post
+                   + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+                else
+                {
+                    string url = string.Format(url_weight_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                 + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                 + "&client_id=" + client_id
+                 + "&client_secret=" + client_secret
+                 + "&sc=" + sc
+                 + "&sv=" + sv_OpenApiWeight
+                 + "&request_type=" + post
+                 + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UploadloadBOData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string post, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_bo_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiSpO2
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+                else
+                {
+                    string url = string.Format(url_bo_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiSpO2
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UploadloadAMData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string post, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_ar_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiActivity
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+                else
+                {
+                    string url = string.Format(url_ar_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiActivity
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UploadloadSLEEPData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string post, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_sr_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiSleep
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+                else
+                {
+                    string url = string.Format(url_sr_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiSleep
+                    + "&request_type=" + post
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+
+                    return ResultString;
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public string UpdataloadBPData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string put, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_bp_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiBP
+                    + "&request_type=" + put
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+                }
+                else
+                {
+                    string url = string.Format(url_bp_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiBP
+                    + "&request_type=" + put
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+                }
+
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UpdataloadBGData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string put, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_bg_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiBG
+                    + "&request_type=" + put
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+                }
+                else
+                {
+                    string url = string.Format(url_bg_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiBG
+                    + "&request_type=" + put
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+                }
+
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UpdataloadWEIGHTData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string put, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_weight_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiWeight
+                    + "&request_type=" + put
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+
+                }
+                else
+                {
+                    string url = string.Format(url_weight_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiWeight
+                    + "&request_type=" + put
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UpdataloadBOData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string put, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_bo_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                  + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                  + "&client_id=" + client_id
+                  + "&client_secret=" + client_secret
+                  + "&sc=" + sc
+                  + "&sv=" + sv_OpenApiSpO2
+                  + "&request_type=" + put
+                  + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+
+                }
+                else
+                {
+                    string url = string.Format(url_bo_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                  + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                  + "&client_id=" + client_id
+                  + "&client_secret=" + client_secret
+                  + "&sc=" + sc
+                  + "&sv=" + sv_OpenApiSpO2
+                  + "&request_type=" + put
+                  + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UpdataloadAMData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string put, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_ar_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiActivity
+                    + "&request_type=" + put
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+
+                }
+                else
+                {
+                    string url = string.Format(url_ar_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                    + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                    + "&client_id=" + client_id
+                    + "&client_secret=" + client_secret
+                    + "&sc=" + sc
+                    + "&sv=" + sv_OpenApiActivity
+                    + "&request_type=" + put
+                    + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public string UpdataloadSLEEPData(HttpContext httpContext, int? pageIndex, DateTime? startTime, DateTime? endTime, string aStr, string put, string querynumber, string aType)
+        {
+            if (httpContext.Session["token"] != null)
+            {
+                if (aType == "xml")
+                {
+                    string url = string.Format(url_sr_data_xml, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                   + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                   + "&client_id=" + client_id
+                   + "&client_secret=" + client_secret
+                   + "&sc=" + sc
+                   + "&sv=" + sv_OpenApiSleep
+                   + "&request_type=" + put
+                   + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+
+                }
+                else
+                {
+                    string url = string.Format(url_sr_data, ((AccessTokenEntity)httpContext.Session["token"]).UserID)
+                   + "?access_token=" + ((AccessTokenEntity)httpContext.Session["token"]).AccessToken
+                   + "&client_id=" + client_id
+                   + "&client_secret=" + client_secret
+                   + "&sc=" + sc
+                   + "&sv=" + sv_OpenApiSleep
+                   + "&request_type=" + put
+                   + "&querynumber=" + querynumber;
+
+                    if (pageIndex.HasValue)
+                        url += "&page_index=" + pageIndex.Value;
+
+                    if (startTime.HasValue)
+                        url += "&start_time=" + UnixTime.ToUnixTime(startTime.Value).ToString();
+
+                    if (endTime.HasValue)
+                        url += "&end_time=" + endTime.Value.ToString();
+
+                    string ResultString = this.HttpPost(url, aStr);
+                    return ResultString;
+
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
     }
 }

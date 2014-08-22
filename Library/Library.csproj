@@ -55,13 +55,16 @@
     <Compile Include="Entity\DownloadBODataResultEntity.cs" />
     <Compile Include="Entity\DownloadBPDataEntity.cs" />
     <Compile Include="Entity\DownloadBPDataResultEntity.cs" />
+    <Compile Include="Entity\DownloadFoodDataEntity.cs" />
+    <Compile Include="Entity\DownloadFoodDataResultEntity.cs" />
     <Compile Include="Entity\DownloadSleepReportDataEntity.cs" />
     <Compile Include="Entity\DownloadSleepReportDataResultEntity.cs" />
+    <Compile Include="Entity\DownloadSportDataEntity.cs" />
+    <Compile Include="Entity\DownloadSportDataReportEntity.cs" />
     <Compile Include="Entity\DownloadUserInfoDataEntity.cs" />
-    <Compile Include="Entity\DownloadUserInfoResultEntity.cs.cs" />
+    <Compile Include="Entity\DownloadUserInfoResultEntity.cs" />
     <Compile Include="Entity\DownloadWeightDataEntity.cs" />
     <Compile Include="Entity\DownloadWeightDataResultEntity.cs" />
-    <Compile Include="Entity\SystemSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

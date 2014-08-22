@@ -1,19 +1,18 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace iHealthlabs.OpenAPI.Sample.Library
+namespace iHealthlabs.OpenAPI.Sample.Library.Entity
 {
-    [DataContract]
-    public class DownloadBPDataResultEntity
+    public class DownloadUserInfoResultEntity
     {
         /// <summary>
         /// The page data
         /// </summary>
         [DataMember]
-        public List<DownloadBPDataEntity> BPDataList { get; set; }
+        public List<DownloadUserInfoDataEntity> UserInfoList { get; set; }
         /// <summary>
         /// Next page URL
         /// </summary>
@@ -45,10 +44,14 @@ namespace iHealthlabs.OpenAPI.Sample.Library
         [DataMember]
         public int RecordCount { get; set; }
         /// <summary>
-        /// Blood pressure unit 0 mmHg  1 kPa
+        /// Weight unit  0 kg   1 lbs
         /// </summary>
         [DataMember]
-        public int BPUnit { get; set; }
-        
+        public int WeightUnit { get; set; }
+        /// <summary>
+        /// Height unit 0 cm 1 inches
+        /// </summary>
+        [DataMember]
+        public int HeightUnit { get; set; }
     }
 }

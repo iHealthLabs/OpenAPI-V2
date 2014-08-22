@@ -8,8 +8,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    <asp:Label ID="Label1" Text="Unit:" runat="server"></asp:Label>
-    <asp:DropDownList ID="dlResponseType" runat="server" Height="25px" Width="136px">
+        <asp:Label ID="Label1" Text="Unit:" runat="server"></asp:Label>
+        <asp:DropDownList ID="dlResponseType" runat="server" Height="25px" Width="136px">
             <asp:ListItem>en_US</asp:ListItem>
             <asp:ListItem>en_UK</asp:ListItem>
             <asp:ListItem>user</asp:ListItem>
@@ -17,12 +17,10 @@
         <br />
         <br />
         <asp:Button ID="btnDownloadBP" runat="server" OnClick="btnDownloadBP_Click" Text="Download OpenApiBP Data" />
-        
         <br />
         <br />
         <asp:Button ID="btnDownloadWeight" runat="server" OnClick="btnDownloadWeight_Click"
             Text="Download OpenApiWeight Data" />
-        
         <br />
         <br />
         <asp:Button ID="btnDownloadBG" runat="server" OnClick="btnDownloadBG_Click" Text="Download OpenApiBG Data" />
@@ -37,37 +35,78 @@
         <asp:Button ID="btnDownloadSR" runat="server" OnClick="btnDownloadSR_Click" Text="Download OpenApiSleep Data" />
         <br />
         <br />
+        <asp:Button ID="btnDownloadFOOD" runat="server" OnClick="btnDownloadFOOD_Click" Text="Download OpenApiFood Data" />
+        <br />
+        <br />
+        <asp:Button ID="btnDownloadSPORT" runat="server" OnClick="btnDownloadSPORT_Click"
+            Text="Download OpenApiSport Data" />
+        <br />
+        <br />
         <asp:Button ID="btnDownloadUser" runat="server" OnClick="btnDownloadUser_Click" Text="Download OpenApiUserInfo Data" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadClientBP" runat="server" 
-            Text="Download ClientAPP OpenApiBP Data" onclick="btnDownloadClientBP_Click" />
+        <asp:Button ID="btnDownloadClientBP" runat="server" Text="Download ClientAPP OpenApiBP Data"
+            OnClick="btnDownloadClientBP_Click" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadClientWeight" runat="server" Text="Download ClientAPP OpenApiWeight Data" onclick="btnDownloadClientWeight_Click" />
+        <asp:Button ID="btnDownloadClientWeight" runat="server" Text="Download ClientAPP OpenApiWeight Data"
+            OnClick="btnDownloadClientWeight_Click" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadClientBO" runat="server" Text="Download ClientAPP OpenApiBO Data" onclick="btnDownloadClientBO_Click" />
+        <asp:Button ID="btnDownloadClientBO" runat="server" Text="Download ClientAPP OpenApiBO Data"
+            OnClick="btnDownloadClientBO_Click" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadClientBG" runat="server" Text="Download ClientAPP OpenApiBG Data" onclick="btnDownloadClientBG_Click" />
+        <asp:Button ID="btnDownloadClientBG" runat="server" Text="Download ClientAPP OpenApiBG Data"
+            OnClick="btnDownloadClientBG_Click" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadClientSR" runat="server" Text="Download ClientAPP OpenApiSleep Data" onclick="btnDownloadClientSR_Click" />
+        <asp:Button ID="btnDownloadClientSR" runat="server" Text="Download ClientAPP OpenApiSleep Data"
+            OnClick="btnDownloadClientSR_Click" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadClientAR" runat="server" Text="Download ClientAPP OpenApiActivity Data" onclick="btnDownloadClientAR_Click" />
+        <asp:Button ID="btnDownloadClientAR" runat="server" Text="Download ClientAPP OpenApiActivity Data"
+            OnClick="btnDownloadClientAR_Click" />
         <br />
         <br />
-        <asp:Button ID="btnDownloadClientUser" runat="server" Text="Download ClientAPP OpenApiUserInfo Data" onclick="btnDownloadClientUser_Click" />
+        <asp:Button ID="btnDownloadClientFOOD" runat="server" OnClick="btnDownloadClientFOOD_Click"
+            Text="Download ClientAPP OpenApiFood Data" />
         <br />
-        <br />      
+        <br />
+        <asp:Button ID="btnDownloadClientSPORT" runat="server" OnClick="btnDownloadClientSPORT_Click"
+            Text="Download ClientAPP OpenApiSport Data" />
+        <br />
+        <br />
+        <asp:Button ID="btnDownloadClientUser" runat="server" Text="Download ClientAPP OpenApiUserInfo Data"
+            OnClick="btnDownloadClientUser_Click" />
+        <br />
+        <br />
         <asp:Button ID="btnRefresh" runat="server" OnClick="btnRefresh_Click" Text="Refresh Access Token" />
         <br />
         <br />
         <asp:Literal ID="lOutput" runat="server"></asp:Literal>
         <br />
         <br />
+        <asp:HiddenField ID="hidNextUrl" runat="server" />
+        <asp:HiddenField ID="hidPrevUrl" runat="server" />
+        <asp:Button ID="BtnBPPrev" runat="server" Visible="false" Text="Prev" OnClick="BPPrev_Click" />
+        <asp:Button ID="BtnBPNext" runat="server" Visible="false" Text="Next" OnClick="BPNext_Click" />
+        <asp:Button ID="BtnWeightPrev" runat="server" Visible="false" Text="Prev" OnClick="WeightPrev_Click" />
+        <asp:Button ID="BtnWeightNext" runat="server" Visible="false" Text="Next" OnClick="WeightNext_Click" />
+        <asp:Button ID="BtnBGPrev" runat="server" Text="Next" Visible="false" OnClick="BGPrev_Click" />
+        <asp:Button ID="BtnBGNext" runat="server" Text="Prev" Visible="false" OnClick="BGNext_Click" />
+        <asp:Button ID="BtnSpo2Prev" runat="server" Text="Next" Visible="false" OnClick="Spo2Prev_Click" />
+        <asp:Button ID="BtnSpo2Next" runat="server" Text="Prev" Visible="false" OnClick="Spo2Next_Click" />
+        <asp:Button ID="BtnActivityPrev" runat="server" Text="Next" Visible="false" OnClick="ActivityPrev_Click" />
+        <asp:Button ID="BtnActivityNext" runat="server" Text="Prev" Visible="false" OnClick="ActivityNext_Click" />
+        <asp:Button ID="BtnSleepPrev" runat="server" Text="Next" Visible="false" OnClick="SleepPrev_Click" />
+        <asp:Button ID="BtnSleepNext" runat="server" Text="Prev" Visible="false" OnClick="SleepNext_Click" />
+        <asp:Button ID="BtnSportPrev" runat="server" Text="Next" Visible="false" OnClick="SportPrev_Click" />
+        <asp:Button ID="BtnSportNext" runat="server" Text="Prev" Visible="false" OnClick="SportNext_Click" />
+        <asp:Button ID="BtnFoodPrev" runat="server" Text="Next" Visible="false" OnClick="FoodPrev_Click" />
+        <asp:Button ID="BtnFoodNext" runat="server" Text="Prev" Visible="false" OnClick="FoodNext_Click" />
+        <asp:Button ID="BtnUserPrev" runat="server" Text="Next" Visible="false" OnClick="UserPrev_Click" />
+        <asp:Button ID="BtnUserNext" runat="server" Text="Prev" Visible="false" OnClick="UserNext_Click" />
         <asp:Repeater ID="rptBPData" runat="server" Visible="false">
             <HeaderTemplate>
                 <table>
@@ -102,6 +141,9 @@
                             </th>
                             <th style="width: 90px">
                                 Last change time
+                            </th>
+                            <th style="width: 90px">
+                                Data Source
                             </th>
                             <th style="width: 90px">
                                 Note
@@ -141,15 +183,18 @@
                     </td>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("MDate")%>
-                        <td bgcolor="#f4f4f4">
-                            <%#Eval("LastChangeTime")%>
-                        </td>
-                        <td bgcolor="#f4f4f4">
-                            <%#Eval("Note")%>
-                        </td>
-                        <td bgcolor="#f4f4f4">
-                            <%#Eval("userid")%>
-                        </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("LastChangeTime")%>
+                    </td>
+                    <th style="width: 90px">
+                        <%#Eval("DataSource")%>
+                    </th>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("Note")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid")%>
+                    </td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
@@ -190,6 +235,9 @@
                             </th>
                             <th style="width: 90px">
                                 Last change time
+                            </th>
+                            <th style="width: 90px">
+                                Data Source
                             </th>
                             <th style="width: 90px">
                                 Note
@@ -233,6 +281,9 @@
                     <td bgcolor="#f4f4f4">
                         <%#Eval("LastChangeTime")%>
                     </td>
+                    <th style="width: 90px">
+                        <%#Eval("DataSource")%>
+                    </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("Note")%>
                     </td>
@@ -263,6 +314,9 @@
                                 Measure time
                             </th>
                             <th style="width: 90px">
+                                Last Change Time
+                            </th>
+                            <th style="width: 90px">
                                 Note
                             </th>
                             <th style="width: 90px">
@@ -273,6 +327,9 @@
                             </th>
                             <th style="width: 90px">
                                 Data only Serial number
+                            </th>
+                            <th style="width: 90px">
+                                Data Source
                             </th>
                             <th style="width: 90px">
                                 UserID
@@ -296,6 +353,9 @@
                         <%#Eval("MDate")%>
                     </td>
                     <td bgcolor="#f4f4f4">
+                        <%#Eval("LastChangeTime")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
                         <%#Eval("Note")%>
                     </td>
                     <td bgcolor="#f4f4f4">
@@ -307,6 +367,9 @@
                     <td bgcolor="#f4f4f4">
                         <%#Eval("DataID")%>
                     </td>
+                    <th style="width: 90px">
+                        <%#Eval("DataSource")%>
+                    </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
                     </td>
@@ -331,6 +394,9 @@
                                 Measure Time
                             </th>
                             <th style="width: 90px">
+                                Last Change Time
+                            </th>
+                            <th style="width: 90px">
                                 Note
                             </th>
                             <th style="width: 90px">
@@ -341,6 +407,9 @@
                             </th>
                             <th style="width: 90px">
                                 Data only Serial number
+                            </th>
+                            <th style="width: 90px">
+                                Data Source
                             </th>
                             <th style="width: 90px">
                                 UserID
@@ -361,6 +430,9 @@
                         <%#Eval("MDate")%>
                     </td>
                     <td bgcolor="#f4f4f4">
+                        <%#Eval("LastChangeTime")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
                         <%#Eval("Note")%>
                     </td>
                     <td bgcolor="#f4f4f4">
@@ -372,6 +444,9 @@
                     <td bgcolor="#f4f4f4">
                         <%#Eval("DataID")%>
                     </td>
+                    <th style="width: 90px">
+                        <%#Eval("DataSource")%>
+                    </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
                     </td>
@@ -396,6 +471,9 @@
                                 Measure Time
                             </th>
                             <th style="width: 90px">
+                                Last Change Time
+                            </th>
+                            <th style="width: 90px">
                                 Note
                             </th>
                             <th style="width: 90px">
@@ -409,6 +487,9 @@
                             </th>
                             <th style="width: 90px">
                                 Calories
+                            </th>
+                            <th style="width: 90px">
+                                Data Source
                             </th>
                             <th style="width: 90px">
                                 UserID
@@ -429,6 +510,9 @@
                         <%#Eval("MDate")%>
                     </td>
                     <td bgcolor="#f4f4f4">
+                        <%#Eval("LastChangeTime")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
                         <%#Eval("Note")%>
                     </td>
                     <td bgcolor="#f4f4f4">
@@ -443,6 +527,9 @@
                     <td bgcolor="#f4f4f4">
                         <%#Eval("Calories")%>
                     </td>
+                    <th style="width: 90px">
+                        <%#Eval("DataSource")%>
+                    </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
                     </td>
@@ -470,6 +557,9 @@
                                 EndTime
                             </th>
                             <th style="width: 90px">
+                                Last Change Time
+                            </th>
+                            <th style="width: 90px">
                                 Note
                             </th>
                             <th style="width: 90px">
@@ -486,6 +576,9 @@
                             </th>
                             <th style="width: 90px">
                                 Awake
+                            </th>
+                            <th style="width: 90px">
+                                Data Source
                             </th>
                             <th style="width: 90px">
                                 UserID
@@ -509,6 +602,9 @@
                         <%#Eval("EndTime")%>
                     </td>
                     <td bgcolor="#f4f4f4">
+                        <%#Eval("LastChangeTime")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
                         <%#Eval("Note")%>
                     </td>
                     <td bgcolor="#f4f4f4">
@@ -526,8 +622,177 @@
                     <td bgcolor="#f4f4f4">
                         <%#Eval("Awake")%>
                     </td>
+                    <th style="width: 90px">
+                        <%#Eval("DataSource")%>
+                    </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
+                    </td>
+                </tr>
+            </ItemTemplate>
+            <FooterTemplate>
+                </tbody></table>
+            </FooterTemplate>
+        </asp:Repeater>
+        <asp:Repeater ID="rptFoodData" runat="server" Visible="false">
+            <HeaderTemplate>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 90px">
+                                FoodName
+                            </th>
+                            <th style="width: 90px">
+                                AmountFood
+                            </th>
+                            <th style="width: 90px">
+                                Calories
+                            </th>
+                            <th style="width: 90px">
+                                FoodKind
+                            </th>
+                            <th style="width: 90px">
+                                DataID
+                            </th>
+                            <th style="width: 90px">
+                                MDate
+                            </th>
+                            <th style="width: 90px">
+                                Last Change Time
+                            </th>
+                            <th style="width: 90px">
+                                Lat
+                            </th>
+                            <th style="width: 90px">
+                                Lon
+                            </th>
+                            <th style="width: 90px">
+                                TimeZone
+                            </th>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("FoodName")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("Amount")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("Calories")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("FoodKind")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("DataID")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("MDate")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("LastChangeTime")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("Lat")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("Lon")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("TimeZone")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid") %>
+                    </td>
+                </tr>
+            </ItemTemplate>
+            <FooterTemplate>
+                </tbody></table>
+            </FooterTemplate>
+        </asp:Repeater>
+        <asp:Repeater ID="rptSportData" runat="server" Visible="false">
+            <HeaderTemplate>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 90px">
+                                SportName
+                            </th>
+                            <th style="width: 90px">
+                                SportStartTime
+                            </th>
+                            <th style="width: 90px">
+                                SportEndTime
+                            </th>
+                            <th style="width: 90px">
+                                Last Change Time
+                            </th>
+                            <th style="width: 90px">
+                                Calories
+                            </th>
+                            <th style="width: 90px">
+                                DateID
+                            </th>
+                            <th style="width: 90px">
+                                Lat
+                            </th>
+                            <th style="width: 90px">
+                                Lon
+                            </th>
+                            <th style="width: 90px">
+                                TimeZone
+                            </th>
+                            <th style="width: 90px">
+                                Data Source
+                            </th>
+                            <th style="width: 90px">
+                                UserID
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("SportName")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("SportStartTime")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("SportEndTime")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("LastChangeTime")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("Calories")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("DataID")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("Lat")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("Lon")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("TimeZone")%>
+                    </td>
+                    <th style="width: 90px">
+                        <%#Eval("DataSource")%>
+                    </th>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("userid")%>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -560,8 +825,7 @@
                             </th>
                             <th style="width: 90px">
                                 Logo
-                            </th>                           
-                            
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -588,14 +852,69 @@
                     </td>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("logo")%>
-                    </td>                  
+                    </td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
                 </tbody></table>
             </FooterTemplate>
         </asp:Repeater>
+        <br />
         <asp:Literal ID="LitUser" runat="server"></asp:Literal>
+        <br />
+        ------------------------------------------------------------------------------------------------------------------------
+        <br />
+        <div>
+            Type Select:
+            <asp:DropDownList ID="dlDataType" runat="server" Height="25px" Width="136px">
+                <asp:ListItem Value="BP">BPData</asp:ListItem>
+                <asp:ListItem Value="BG">BGData</asp:ListItem>
+                <asp:ListItem Value="WEIGHT">WEIGHTData</asp:ListItem>
+                <asp:ListItem Value="BO">BOData</asp:ListItem>
+                <asp:ListItem Value="AM">AMData</asp:ListItem>
+                <asp:ListItem Value="SLEEP">SLEEPData</asp:ListItem>
+            </asp:DropDownList>
+            <asp:CheckBox ID="chxml" runat="server" Text="xml Format" />
+            <asp:Button ID="btnProduce" runat="server" OnClick="btnProduce_Click" Text="Produce Data" /><br />
+            <br />
+            <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" Height="100px" Width="589px"></asp:TextBox><br />
+            <br />
+            <table>
+                <tr>
+                    <td>
+                        <asp:Button ID="btnUploadBP" runat="server" OnClick="btnUploadBP_Click" Text="Upload OpenApiBP Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUploadBG" runat="server" OnClick="btnUploadBG_Click" Text="Upload OpenApiBG Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUploadWeight" runat="server" OnClick="btnUploadWeight_Click" Text="Upload OpenApiWeight Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUploadBO" runat="server" OnClick="btnUploadBO_Click" Text="Upload OpenApiSpO2 Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUploadAM" runat="server" OnClick="btnUploadAM_Click" Text="Upload OpenApiActivity Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUploadSLEEP" runat="server" OnClick="btnUploadSLEEP_Click" Text="Upload OpenApiSleep Data" /><br />
+                        <br />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnUpdataBP" runat="server" OnClick="btnUpdataBP_Click" Text="Updata OpenApiBP Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUpdataBG" runat="server" OnClick="btnUpdataBG_Click" Text="Updata OpenApiBG Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUpdataWeight" runat="server" OnClick="btnUpdataWeight_Click" Text="Updata OpenApiWeight Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUpdataBO" runat="server" OnClick="btnUpdataBO_Click" Text="Updata OpenApiSpO2 Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUpdataAM" runat="server" OnClick="btnUpdataAM_Click" Text="Updata OpenApiActivity Data" /><br />
+                        <br />
+                        <asp:Button ID="btnUpdataSLEEP" runat="server" OnClick="btnUpdataSLEEP_Click" Text="Updata OpenApiSleep Data" /><br />
+                        <br />
+                    </td>
+                </tr>
+            </table>
+            <asp:TextBox ID="txtBody" runat="server" TextMode="MultiLine" Height="200px" Width="589px"></asp:TextBox><br />
+            <br />
+            <br />
+        </div>
     </div>
     </form>
 </body>

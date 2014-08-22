@@ -1,66 +1,54 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace iHealthlabs.OpenAPI.Sample.Library
+namespace iHealthlabs.OpenAPI.Sample.Library.Entity
 {
-    [DataContract]
-    public class DownloadWeightDataEntity
+    public class DownloadSportDataEntity
     {
         /// <summary>
-        /// BMI grade
+        /// Sport Name
         /// </summary>
         [DataMember]
-        public double BMI { get; set; }
+        public string SportName { get; set; }
         /// <summary>
-        /// Bone mineral density 
+        /// Sport Start Time
         /// </summary>
         [DataMember]
-        public double BoneValue { get; set; }
+        public long SportStartTime { get; set; }
         /// <summary>
-        /// DCI
+        /// Sport End Time
         /// </summary>
         [DataMember]
-        public double DCI { get; set; }
+        public long SportEndTime { get; set; }
         /// <summary>
-        /// Body fat 
+        ///Time Zone
         /// </summary>
         [DataMember]
-        public double FatValue { get; set; }
+        public double TimeZone { get; set; }
         /// <summary>
-        /// Muscle
+        /// Lon
         /// </summary>
         [DataMember]
-        public double MuscaleValue { get; set; }
+        public double Lon { get; set; }
         /// <summary>
-        /// Water
+        /// Lat
         /// </summary>
         [DataMember]
-        public double WaterValue { get; set; }
+        public double Lat { get; set; }
         /// <summary>
-        /// Weight
-        /// </summary>
-        [DataMember]
-        public double WeightValue { get; set; }
-        /// <summary>
-        /// Data only Serial number
+        /// DataID
         /// </summary>
         [DataMember]
         public string DataID { get; set; }
-        /// <summary>
-        /// Data measurement of time
+        /// consumption of Calories 
         /// </summary>
         [DataMember]
-        public long MDate { get; set; }
+        public double Calories { get; set; }
         /// <summary>
-        /// Note
-        /// </summary>
-        [DataMember]
-        public string Note { get; set; }
-        /// <summary>
-        /// Last change time
+        /// Last Change Time
         /// </summary>
         [DataMember]
         public long LastChangeTime { get; set; }

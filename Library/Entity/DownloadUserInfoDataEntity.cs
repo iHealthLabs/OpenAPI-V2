@@ -26,7 +26,7 @@ namespace iHealthlabs.OpenAPI.Sample.Library.Entity
         [DataMember]
         public int UserHeightUnit { get; set; }
         [DataMember]
-        public int UserWeightUnit { get; set; }
+        public int UserWeightUnit { get; set; } 
     }
 }
 

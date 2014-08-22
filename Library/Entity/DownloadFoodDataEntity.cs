@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,56 +7,61 @@ using System.Runtime.Serialization;
 namespace iHealthlabs.OpenAPI.Sample.Library.Entity
 {
     [DataContract]
-    public class DownloadBODataEntity
+    public class DownloadFoodDataEntity
     {
         /// <summary>
-        /// Oxygen value
+        /// Food Name
         /// </summary>
         [DataMember]
-        public double BO { get; set; }
+        public string FoodName { get; set; }
         /// <summary>
-        /// Heart rate
-        /// </summary>
-        [DataMember]
-        public double HR { get; set; }
-        /// <summary>
-        /// Measure time
+        /// Eating Time
         /// </summary>
         [DataMember]
         public long MDate { get; set; }
         /// <summary>
-        /// note
-        /// </summary>
-        [DataMember]
-        public string Note { get; set; }
-        /// <summary>
-        /// Longitude
-        /// </summary>
-        [DataMember]
-        public double Lon { get; set; }
-        /// <summary>
-        /// Latitude
+        /// Lat
         /// </summary>
         [DataMember]
         public double Lat { get; set; }
         /// <summary>
-        /// Data only Serial number
+        /// Lon
+        /// </summary>
+        [DataMember]
+        public double Lon { get; set; }
+        /// <summary>
+        /// DataId
         /// </summary>
         [DataMember]
         public string DataID { get; set; }
+        /// <summary>
+        /// Food total Calories
+        /// </summary>
+        [DataMember]
+        public double Calories { get; set; }
+        /// <summary>
+        /// Food Amount
+        /// </summary>
+        [DataMember]
+        public double Amount { get; set; }
+        /// <summary>
+        /// Time Zone
+        /// </summary>
+        [DataMember]
+        public double TimeZone { get; set; }
+        /// <summary>
+        /// Food Kind
+        /// </summary>
+        [DataMember]
+        public string FoodKind { get; set; }
         /// <summary>
         /// Last change time
         /// </summary>
         [DataMember]
         public long LastChangeTime { get; set; }
-        /// <summary>
-        /// Data Source the value is "Manual" or "FromDevice"
-        /// </summary>
-        [DataMember]
-        public string DataSource { get; set; }
-        /// <summary>
-        /// UserId
-        /// </summary>
+        ///// <summary>
+        ///// UserId
+        ///// </summary>
         [DataMember]
         public string userid { get; set; }
     }
