@@ -64,5 +64,10 @@ namespace iHealthlabs.OpenAPI.Sample.Library.Entity
         /// </summary>
         [DataMember]
         public string userid { get; set; }
+        /// <summary>
+        /// Time zone of measurement location
+        /// </summary>
+        [DataMember]
+        public string TimeZone { get; set; }
     }
 }

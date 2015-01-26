@@ -151,6 +151,9 @@
                             <th style="width: 90px">
                                 UserID
                             </th>
+                            <th style="width: 90px">
+                                TimeZone
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -194,6 +197,9 @@
                     </td>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid")%>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("TimeZone")%>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -245,6 +251,9 @@
                             <th style="width: 90px">
                                 UserID
                             </th>
+                            <th style="width: 90px">
+                                TimeZone
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -290,6 +299,9 @@
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
                     </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("TimeZone")%>
+                    </td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
@@ -334,6 +346,9 @@
                             <th style="width: 90px">
                                 UserID
                             </th>
+                            <th style="width: 90px">
+                                TimeZone
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -372,6 +387,9 @@
                     </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("TimeZone")%>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -414,6 +432,9 @@
                             <th style="width: 90px">
                                 UserID
                             </th>
+                            <th style="width: 90px">
+                                TimeZone
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -449,6 +470,9 @@
                     </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("TimeZone")%>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -494,6 +518,9 @@
                             <th style="width: 90px">
                                 UserID
                             </th>
+                            <th style="width: 90px">
+                                TimeZone
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -532,6 +559,9 @@
                     </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("TimeZone")%>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -583,6 +613,9 @@
                             <th style="width: 90px">
                                 UserID
                             </th>
+                            <th style="width: 90px">
+                                TimeZone
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -627,6 +660,9 @@
                     </th>
                     <td bgcolor="#f4f4f4">
                         <%#Eval("userid") %>
+                    </td>
+                    <td bgcolor="#f4f4f4">
+                        <%#Eval("TimeZone")%>
                     </td>
                 </tr>
             </ItemTemplate>
